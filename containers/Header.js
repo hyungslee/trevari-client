@@ -16,7 +16,7 @@ class Header extends Component {
           <ul>
             <Link href="/recommend">
               <li>
-                <button id="header_recommend">추천 도서 배포 테스트</button>
+                <button id="header_recommend">추천 도서</button>
               </li>
             </Link>
             <Link
