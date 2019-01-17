@@ -48,7 +48,7 @@ class ReviewItem extends React.Component {
     let day = bareDate.slice(8, 10);
     let time = bareDate.slice(11, 13);
     let minute = bareDate.slice(14, 16);
-    let newDate = `${year}년 ${month}월 ${day}일  ${time}시 ${minute}분`;
+    let newDate = `${year}-${month}-${day}. ${time}:${minute}`;
 
     return newDate;
   };
@@ -375,20 +375,24 @@ class ReviewItem extends React.Component {
 
   render() {
     const review = this.props.review;
-
+    const ID = Number(this.props.id)
+    
     return (
       <div id="reviewCard">
         <div className="reviewCard_box">
           <div id="outer_content">
             <Link
               as={`/book/${review.book_id}`}
-              href={`/book?id=${review.book_id}`}
+              href={{
+                pathname: "/book",
+                query: {
+                  id: review.book_id,
+                  ID: ID
+                }
+              }}
             >
               <div className="image_container">
-                <img
-                  src={this._getBookImage()}
-                  className="oneImage"
-                />
+                <img src={this._getBookImage()} className="oneImage" />
               </div>
             </Link>
             <div>
@@ -407,7 +411,7 @@ class ReviewItem extends React.Component {
                 {review.Book.title}
               </div>
               <div className="date" type="text">
-                작성시간 : {this._getDate()}
+                {this._getDate()}
               </div>
             </div>
             <div className="reviewText_box" type="text">
@@ -442,6 +446,11 @@ class ReviewItem extends React.Component {
                       삭제
                     </button>
                   </div>
+                  <div className="openHiddenTextBtn_container">
+                    <button className="openHiddenTextBtn" onClick={this._openReviewBtn_clickHandler}>
+                      {this.state.openBtnName}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -468,7 +477,7 @@ class ReviewItem extends React.Component {
           </div>
         </div>
 
-        <div className="reviewText-hidden">{review.text}</div>
+        <div className="reviewText_hidden">{review.text}</div>
 
         <style jsx>{`
           #reviewCard {
@@ -569,9 +578,8 @@ class ReviewItem extends React.Component {
             
           }
           .reviewText {
-            margin-bottom: 20px;
+            padding-bottom: 20px;
             height: 70px;
-            
           }
           .bottom {
             display: flex;
@@ -581,29 +589,78 @@ class ReviewItem extends React.Component {
           .openReviewBtn {
             display: none;
           }
+          .openHiddenTextBtn_container{
+            display: none;
+          }
           .hidden_editReviewBtn {
             display: none;
           }
-          .reviewText-hidden {
+          .reviewText_hidden {
             margin-top: 15px;
             font-size: 13px;
             display: none;
           }
           @media (max-width: 600px) {
+            .reviewCard_box {
+              flex-direction: column;
+            }
             .top {
-              
+              flex-direction: column;
+              align-items: center;
+            }
+            .name {
+              font-size: 15px;
             }
             .reviewText {
               display: none;
             }
-            .reviewText-hidden {
-              display: block;
+            .reviewText_hidden {
+              display: ${this.state.hiddenReviewStatus};
             }
             .myRate {
-              font-size: 14px;
+              font-size: 12px;
             }
             .averageRate {
-              font-size: 14px;
+              font-size: 12px;
+            }
+            #outer_content {
+              height: 180px;
+              margin-bottom: 10px;
+            }
+            .image_container {
+              width: 130px;
+              height: 180px;
+              margin-left: auto;
+              margin-right: auto;
+            }
+            #innerContent {
+              margin: 0px 0px 0px 0px;
+            }
+            .bottom {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+            .deleteBtn {
+              margin-right: 10px;
+            }
+            .openHiddenTextBtn_container {
+              display: block;
+            }
+            .openHiddenTextBtn {
+              font-size: 15px;
+              font-weight: 600;
+              padding: 3px 20px 3px 20px;
+              color: white;
+              background-color: #ff8906;
+              border: none;
+              cursor: pointer;
+              border-radius: .15rem;
+          
+            }
+            .reviewCard_box {
+              padding-bottom: 20px;
+              border-bottom: 1px solid #DDD;
             }
             // #reviewCard {
             //   display: flex;

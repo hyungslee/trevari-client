@@ -45,23 +45,21 @@ class BookmarkItem extends React.Component {
 
   render() {
     const book = this.props.book;
-    // const ID = Number(this.props.id)
-    console.log(this.props.book.Book.id)
+    const ID = Number(this.props.id);
 
     return (
       <div id="bookmark_content">
         <div>
-          <Link 
-            as={`/book/${book.Book.id}`} 
-            href={`/book?id=${book.Book.id}`}
-            // href={{
-            //   pathname: "/book",
-            //   query: { 
-            //     id: book.Book.id, 
-            //     ID: ID 
-            //   }
-            // }}
-            >
+          <Link
+            as={`/book/${book.Book.id}`}
+            href={{
+              pathname: "/book",
+              query: {
+                id: book.Book.id,
+                ID: ID
+              }
+            }}
+          >
             <div className="image_box">
               <img
                 className="image"
@@ -121,21 +119,21 @@ class BookmarkItem extends React.Component {
           .deleteBtn:hover {
             background-color: #e07300;
           }
-          @media screen and (max-width: 800px) {
-            #bookmark_content {
-              width: 80px;
-              height: 130px;
-              position: relative;
-            }
-            .image_container {
-              width: 80px;
-              height: 130px;
-            }
-            .deleteBtn {
-              font-size: 12px;
-              height: 20px;
-              padding: 0px;
-            }
+          @media screen and (max-width: 600px) {
+            // #bookmark_content {
+            //   width: 80px;
+            //   height: 130px;
+            //   position: relative;
+            // }
+            // .image_container {
+            //   width: 80px;
+            //   height: 130px;
+            // }
+            // .deleteBtn {
+            //   font-size: 12px;
+            //   height: 20px;
+            //   padding: 0px;
+            // }
           }
         `}</style>
       </div>
