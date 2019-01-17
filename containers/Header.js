@@ -16,7 +16,7 @@ class Header extends Component {
           <ul>
             <Link href="/recommend">
               <li>
-                <button id="header_recommend">추천 도서</button>
+                <button id="header_recommend">추천 도서 배포 테스트</button>
               </li>
             </Link>
             <Link
@@ -224,14 +224,14 @@ const Hamburger = function(props) {
           margin-left: auto;
           margin-right: 8px;
         }
-        
+
         .link {
           border-bottom: solid 1px #ddd;
           font-size: 17px;
           margin-right: 10px;
           margin-left: 10px;
           padding-top: 10px;
-          color: rgba(0,0,0,0.5);
+          color: rgba(0, 0, 0, 0.5);
         }
         .link:hover {
           color: #ff8906;
