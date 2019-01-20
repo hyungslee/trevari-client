@@ -25,6 +25,7 @@ class Recommend extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      top: this.props.bestRated.slice(0, 3),
       recommend: this.props.recommend,
       bestRated: this.props.bestRated
     };
@@ -115,7 +116,7 @@ class Recommend extends Component {
       <div>
         <Filter _onSearchBookTitle={this._onSearchBookTitle} />
         <div id="recommend">
-          <RecommendBanner ID={this.props.ID} />
+          <RecommendBanner top={this.state.top} ID={this.props.ID} />
           <div id="recommend-container">
             <div id="recommend_box">
               <RecommendBooks

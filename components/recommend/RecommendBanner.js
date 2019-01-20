@@ -1,8 +1,21 @@
 import Link from "next/link";
+import React, { Component } from 'react';
 
-const RecommendBanner = props => {
-  return (
-    <div id="recommend_banner">
+class RecommendBanner extends Component {
+  _getBookImage = (image) => {
+    const getBookImage = image;
+    for (let i = 0; i < getBookImage.length; i++) {
+      if (getBookImage[i] === "?") {
+        const changeBookImage = getBookImage.slice(0, i);
+        return changeBookImage;
+      }
+    }
+    return getBookImage;
+  };
+
+  render() {
+    return (
+      <div id="recommend_banner">
       <div id="recommend_banner-gradient">
         <div className="recommend_banner_box">
           <div className="recommend_banner_top">
@@ -20,14 +33,14 @@ const RecommendBanner = props => {
                     <div className="recommend_banner_books_book_best">2</div>
                   </div>
                   <Link
-                    as={`/book/900`}
+                    as={`/book/${this.props.top[1].id}`}
                     href={{
                       pathname: "/book",
-                      query: { id: "900", ID: props.ID }
+                      query: { id: this.props.top[1].id, ID: this.props.ID }
                     }}
                   >
                     <div className="recommend_banner_books_book1_img1">
-                      <img src="https://bookthumb-phinf.pstatic.net/cover/109/617/10961797.jpg" />
+                      <img src={this._getBookImage(this.props.top[1].image)} />
                     </div>
                   </Link>
                 </div>
@@ -37,14 +50,14 @@ const RecommendBanner = props => {
                     <div className="recommend_banner_books_book_best">1</div>
                   </div>
                   <Link
-                    as={`/book/530`}
+                    as={`/book/${this.props.top[0].id}`}
                     href={{
                       pathname: "/book",
-                      query: { id: "530", ID: props.ID }
+                      query: { id: this.props.top[0].id, ID: this.props.ID }
                     }}
                   >
                     <div className="recommend_banner_books_book2_img2">
-                      <img src="https://bookthumb-phinf.pstatic.net/cover/136/037/13603721.jpg" />
+                      <img src={this._getBookImage(this.props.top[0].image)} />
                     </div>
                   </Link>
                 </div>
@@ -54,14 +67,14 @@ const RecommendBanner = props => {
                     <div className="recommend_banner_books_book_best"> 3</div>
                   </div>
                   <Link
-                    as={`/book/195`}
+                    as={`/book/${this.props.top[2].id}`}
                     href={{
                       pathname: "/book",
-                      query: { id: "195", ID: props.ID }
+                      query: { id: this.props.top[2].id, ID: this.props.ID }
                     }}
                   >
                     <div className="recommend_banner_books_book3_img3">
-                      <img src="https://bookthumb-phinf.pstatic.net/cover/044/947/04494783.jpg" />
+                      <img src={this._getBookImage(this.props.top[2].image)} />
                     </div>
                   </Link>
                 </div>
@@ -190,7 +203,8 @@ const RecommendBanner = props => {
         }
       `}</style>
     </div>
-  );
-};
+    );
+  }
+}
 
 export default RecommendBanner;
